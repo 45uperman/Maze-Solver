@@ -140,7 +140,7 @@ class Maze:
                 column.append(next)
                 try:
                     next.draw()
-                    self._animate()
+                    self._animate(0.01)
                 except AttributeError:
                     if self.window is not None:
                         raise AttributeError(f"'{type(self.window)}' object is not a window!")
@@ -149,14 +149,13 @@ class Maze:
     def _draw_cell(self, cell):
         try:
             cell.draw()
-            self._animate()
         except AttributeError:
             if self.window is not None:
                 raise AttributeError(f"'{type(self.window)}' object is not a window!")
     
-    def _animate(self):
+    def _animate(self, time=0.05):
         self.window.redraw()
-        sleep(0.05)
+        sleep(time)
     
     def _break_entrance_and_exit(self):
         self._cells[0][0].has_top = False
@@ -189,7 +188,7 @@ class Maze:
             try:
                 self._draw_cell(self._cells[i][j])
                 self._draw_cell(self._cells[next[0]][next[1]])
-                self._animate()
+                self._animate(0.01)
             except AttributeError:
                 if self.window is not None:
                     raise AttributeError(f"'{type(self.window)}' object is not a window!")
